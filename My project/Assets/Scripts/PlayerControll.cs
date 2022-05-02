@@ -18,12 +18,12 @@ public class PlayerControll : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        if(horizontalInput >= 0)
+        if(horizontalInput > 0)
             {
                 transform.eulerAngles = new Vector3(0, 0, 0);
                 transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
             }
-        if(horizontalInput < 0)
+        if(horizontalInput <= 0)
             {
                 transform.eulerAngles = new Vector3(0, 180, 0);
                 transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed * -1);
