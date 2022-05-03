@@ -8,7 +8,7 @@ public class PlayerControll : MonoBehaviour
     public float horizontalInput;
     public float veritcalInput;
     private Rigidbody playerRb;
-
+    public bool onLadder = false;
 
 
     // Start is called before the first frame update
@@ -32,12 +32,19 @@ public class PlayerControll : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 180, 0);
             transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed * -1);
         }
-    }
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Ladder")
+        if(onLadder)
         {
-            playerRb.AddForce(transform.up * veritcalInput * speed);
+            transform.Translate(Vector3.up * veritcalInput * Time.deltaTime * speed);
+        }
+    }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Pee Pee Poo Poo");
+        if (other.CompareTag("Ladder"))
+        {
+            onLadder = true;
+            Debug.Log("Poo poo pee pee");
         }
     }
 }
