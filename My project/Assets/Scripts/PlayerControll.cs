@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerControll : MonoBehaviour
 {
-    public float speed = 5.0f;
+    public float speed = 2.5f;
+    public float climbSpeed = 5.0f;
     public float horizontalInput;
     public float veritcalInput;
     private Rigidbody playerRb;
     public bool onLadder = false;
+    public bool isClimbing = false;
 
 
     // Start is called before the first frame update
@@ -34,17 +36,24 @@ public class PlayerControll : MonoBehaviour
         }
         if(onLadder)
         {
-            transform.Translate(Vector3.up * veritcalInput * Time.deltaTime * speed);
+            transform.Translate(Vector3.up * veritcalInput * Time.deltaTime * climbSpeed);
         }
+
     }
     
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Pee Pee Poo Poo");
         if (other.CompareTag("Ladder"))
         {
             onLadder = true;
-            Debug.Log("Poo poo pee pee");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Ladder"))
+        {
+            onLadder = false;
         }
     }
 }
