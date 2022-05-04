@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Barricade
   - Ladder
+  - Enemy
   layers:
   - Default
   - TransparentFX
