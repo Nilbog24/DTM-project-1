@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < enemiesToSpawn; i++)
             {
                 int whichEnemy = Random.Range(1, 10);
-                Debug.Log(whichEnemy);
                 if(whichEnemy >= 1 && whichEnemy <= 5)
                 {
                     Instantiate(oozeEnemyPrefab, groundSpawnPosition, oozeEnemyPrefab.transform.rotation);
@@ -34,9 +33,9 @@ public class GameManager : MonoBehaviour
                 {
                     Instantiate(wolfEnemyPrefab, groundSpawnPosition, wolfEnemyPrefab.transform.rotation);
                 }
-                else if(whichEnemy == 9 && whichEnemy == 10)
+                else if(whichEnemy >= 9 && whichEnemy <= 10)
                 {
-                    Instantiate(skullEnemyPrefab, groundSpawnPosition, skullEnemyPrefab.transform.rotation);
+                    Instantiate(skullEnemyPrefab, airSpawnPosition, skullEnemyPrefab.transform.rotation);
                 }
             }
     }

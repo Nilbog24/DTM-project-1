@@ -5,12 +5,11 @@ using UnityEngine;
 public class PlayerControll : MonoBehaviour
 {
     public float speed = 2.5f;
-    public float climbSpeed = 5.0f;
+    public float climbSpeed = 3.0f;
     public float horizontalInput;
     public float veritcalInput;
     private Rigidbody playerRb;
     public bool onLadder = false;
-    public bool isClimbing = false;
 
 
     // Start is called before the first frame update
@@ -24,6 +23,8 @@ public class PlayerControll : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         veritcalInput = Input.GetAxis("Vertical");
+
+        Vector3 mousePosition = Input.mousePosition;
         if(horizontalInput > 0)
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
@@ -38,7 +39,6 @@ public class PlayerControll : MonoBehaviour
         {
             transform.Translate(Vector3.up * veritcalInput * Time.deltaTime * climbSpeed);
         }
-
     }
     
     private void OnTriggerEnter2D(Collider2D other)
