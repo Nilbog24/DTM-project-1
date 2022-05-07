@@ -11,10 +11,14 @@ public class Turret : MonoBehaviour
     public bool canFire;
     private float timer;
     public float timeBetweenFiring;
+    private PlayerControll playerControllerScript;
+
     // Start is called before the first frame update
     void Start()
     {
         mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        playerControllerScript = GameObject.Find("Player").GetComponent<PlayerControll>();
+
     }
 
     // Update is called once per frame
@@ -42,6 +46,12 @@ public class Turret : MonoBehaviour
         {
             canFire = false;
             Instantiate(projectilePrefab, projectileTransform.position, Quaternion.identity);
+        }
+
+        if(playerControllerScript.gameOver == true)
+        {
+            canFire = false;
+            timeBetweenFiring = 2147483647;
         }
     }
 }

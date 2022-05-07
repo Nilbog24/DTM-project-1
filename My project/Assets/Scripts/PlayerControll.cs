@@ -10,12 +10,13 @@ public class PlayerControll : MonoBehaviour
     public float veritcalInput;
     private Rigidbody playerRb;
     public bool onLadder = false;
-
+    public bool gameOver;
 
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        onLadder = false;
     }
 
     // Update is called once per frame
@@ -25,17 +26,17 @@ public class PlayerControll : MonoBehaviour
         veritcalInput = Input.GetAxis("Vertical");
 
         Vector3 mousePosition = Input.mousePosition;
-        if(horizontalInput > 0)
+        if(horizontalInput > 0 && !gameOver)
         {
             transform.eulerAngles = new Vector3(0, 0, 0);
             transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
         }
-        if(horizontalInput <= 0)
+        if(horizontalInput <= 0 && !gameOver)
         {
             transform.eulerAngles = new Vector3(0, 180, 0);
             transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed * -1);
         }
-        if(onLadder)
+        if(onLadder && !gameOver)
         {
             transform.Translate(Vector3.up * veritcalInput * Time.deltaTime * climbSpeed);
         }
@@ -46,6 +47,10 @@ public class PlayerControll : MonoBehaviour
         if (other.CompareTag("Ladder"))
         {
             onLadder = true;
+        }
+        if(other.CompareTag("Enemy"))
+        {
+            gameOver = true;            
         }
     }
 
