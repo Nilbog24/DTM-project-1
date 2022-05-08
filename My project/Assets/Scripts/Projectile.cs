@@ -8,6 +8,8 @@ public class Projectile : MonoBehaviour
     private Camera mainCam;
     private Rigidbody2D rb;
     public float force;
+    private GameManager gameManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,7 @@ public class Projectile : MonoBehaviour
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot + 180);
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -40,6 +43,7 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject);
             Destroy(other.gameObject);
+            gameManager.UpdateScore(1);
         }
         else if (!other.CompareTag("Player") && !other.CompareTag("Arrow"))
         {

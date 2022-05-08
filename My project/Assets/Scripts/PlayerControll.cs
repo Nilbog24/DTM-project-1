@@ -11,12 +11,18 @@ public class PlayerControll : MonoBehaviour
     private Rigidbody playerRb;
     public bool onLadder = false;
     public bool gameOver;
+    private GameManager gameManager;
+    public bool isWin;
+    public bool isLose;
 
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         onLadder = false;
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        isWin = false;
+
     }
 
     // Update is called once per frame
@@ -40,6 +46,12 @@ public class PlayerControll : MonoBehaviour
         {
             transform.Translate(Vector3.up * veritcalInput * Time.deltaTime * climbSpeed);
         }
+
+        if(gameManager.waveNumber == 31)
+        {
+            gameOver = true;
+            isWin = true;
+        }
     }
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -50,7 +62,8 @@ public class PlayerControll : MonoBehaviour
         }
         if(other.CompareTag("Enemy"))
         {
-            gameOver = true;            
+            gameOver = true;
+            isLose = true;            
         }
     }
 

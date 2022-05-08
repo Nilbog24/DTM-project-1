@@ -7,6 +7,7 @@ public class Monster : MonoBehaviour
     public float speedFactor;
     public float speed;
     private PlayerControll playerControllerScript;
+    
     // Start is called before the first frame update
     void Start()
     {
